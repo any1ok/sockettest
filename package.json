@@ -1,0 +1,23 @@
+{
+  "name": "sockettest",
+  "version": "1.0.0",
+  "description": "sockettest",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://any1ok@github.com/any1ok/sockettest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/any1ok/sockettest/issues"
+  },
+  "homepage": "https://github.com/any1ok/sockettest#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
