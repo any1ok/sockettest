@@ -1,13 +1,26 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
+import express from "express"
+import initEnv from "./config/env/index.js"
+import path from 'path';
+import http from "http";
 
-app.get('/', (req, res) => {
-    res.json({
-        success: true,
+initEnv().then(async () =>{
+
+    const { APP_PORT } = process.env;
+    const app = express();
+
+    app.get('/', (req, res) => {
+        res.json({
+            success: true,
+        });
     });
-});
-//??
-app.listen(port, () => {
-    console.log(`server is listening at localhost:${process.env.PORT}`);
-});
+
+    const server = http.createServer(app);
+    server.listen(APP_PORT, "0.0.0.0", () => {
+      console.log(`[Server] running on ${APP_PORT}`);
+    });
+}).catch((err) => {
+    console.log("[ENV] FAILURE");
+    console.log(err);
+  });
+
+
