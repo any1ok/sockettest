@@ -16,6 +16,7 @@ initEnv().then(async () =>{
 
     morgan.token("customDate", () => moment().format("YYYY-MM-DD HH:mm:ss"));
     
+    
     const morganChalk = morgan(
       (tokens, req, res) => {
         
@@ -50,10 +51,9 @@ initEnv().then(async () =>{
               return "white";
           }
         })();
-        console.log(tokens);
         return [
           tokens.customDate(), // date
-          chalk[methodColor].black(tokens.method(req, res)), // http method
+          chalk[methodColor].black(tokens.method(req)), // http method
           tokens.url(req, res), // uri
           chalk[statusColor](tokens.status(req, res)), // response status
         ].join(" ");
@@ -64,10 +64,14 @@ initEnv().then(async () =>{
       },
     } */
     );
-    app.use(morganChalk);
+     app.use(morganChalk);
+
+
+    // app.use(helmet.hidePoweredBy());
+    // app.use(helmet.noSniff());
     
     app.get('/p', (req, res) => {
-        res.status(200).json({
+        res.status(404).json({
             success: true,
           });
     });
