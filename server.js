@@ -67,8 +67,8 @@ initEnv().then(async () =>{
      app.use(morganChalk);
 
 
-    // app.use(helmet.hidePoweredBy());
-    // app.use(helmet.noSniff());
+    app.use(helmet.hidePoweredBy());
+    app.use(helmet.noSniff());
     
     app.get('/p', (req, res) => {
         res.status(404).json({
