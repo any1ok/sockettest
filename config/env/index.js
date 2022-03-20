@@ -52,11 +52,12 @@ const __dirname = path.dirname(__filename);
       const envConfig = dotenv.parse(
         fs.readFileSync(path.join(__dirname, `./.env.${process.env.NODE_ENV}`))
       );
-
+      
       for (const key of Object.keys(envConfig)) {
         if (encryptedKey[process.env.NODE_ENV].includes(key)) {
           //process.env[key] = await optionalDecrypt(envConfig[key]);
           process.env[key] = envConfig[key];
+          
         } else {
           process.env[key] = envConfig[key];
         }
