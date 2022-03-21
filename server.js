@@ -6,6 +6,13 @@ import morgan from "morgan";
 import chalk from "chalk";
 import moment from "moment"
 import helmet from "helmet"
+import cors from "cors"
+
+let corsOptions = {
+  origin: 'localhost:3000',
+  credentials: true
+}
+
 
 initEnv().then(async () =>{
 
@@ -65,17 +72,23 @@ initEnv().then(async () =>{
       },
     } */
     );
-     app.use(morganChalk);
+    app.use(morganChalk);
 
 
+    app.use(cors(corsOptions));
     app.use(helmet.hidePoweredBy());
     app.use(helmet.noSniff());
     
     app.get('/p', (req, res) => {
-        res.status(404).json({
+        res.status(200).json({
             success: true,
           });
     });
+    app.post('/p2', (req, res) => {
+      res.status(200).json({
+          success: true,
+        });
+  });
     const server = http.createServer(app);
     server.listen(APP_PORT, "0.0.0.0", () => {
       console.log(`[Server] running on ${APP_PORT}`);
