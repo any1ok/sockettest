@@ -7,7 +7,8 @@ import chalk from "chalk";
 import moment from "moment"
 import helmet from "helmet"
 import cors from "cors"
-
+import requestIp from "request-ip";
+import geoip from "geoip-lite"
 let corsOptions = {
   origin: 'localhost:3000',
   credentials: true
@@ -78,16 +79,31 @@ initEnv().then(async () =>{
     app.use(cors(corsOptions));
     app.use(helmet.hidePoweredBy());
     app.use(helmet.noSniff());
+
+    
+    app.use(requestIp.mw())
+    app.use(function(req, res, next) {
+        const ip = req.clientIp;
+        req.clientIp2 = ip;
+        next();
+    });
     
     app.get('/p', (req, res) => {
+      const clientIp = requestIp.getClientIp(req); 
+      let geo = geoip.lookup();
+        //console.log("위도,",geo.ll[0]);
+        //console.log("경도,",geo.ll[1]);
         res.status(200).json({
-            success: true,
+            success: true,clientIp , kk : req.clientIp2 , //latitude : geo.ll[0] , longitude : geo.ll[1]
           });
     });
     app.post('/p2', (req, res) => {
       res.status(200).json({
           success: true,
         });
+
+      
+    
   });
     const server = http.createServer(app);
     server.listen(APP_PORT, "0.0.0.0", () => {
