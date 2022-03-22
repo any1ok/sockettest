@@ -20,9 +20,9 @@ initEnv().then(async () =>{
     const { APP_PORT } = process.env;
     const app = express();
     const { default: router } = await import("./route/index.js");
-
+    const { default: socket } = await import("./socket.js");
+    app.use(router);
     
-
     morgan.token("customDate", () => moment().format("YYYY-MM-DD HH:mm:ss"));
     
     
@@ -101,14 +101,27 @@ initEnv().then(async () =>{
       res.status(200).json({
           success: true,
         });
-
+        
+    app.use((err, req, res, next) => {
+      // 컨트롤러에서 에러 발생시 처리
+      console.log(err);
+      return res.status(err.code || 500).json({
+        message: err.message,
+        type: err.type || "INTERNAL_SERVER_ERROR",
+        reason: err.reason,
+        payload: err.payload,
+      });
+    });
       
     
   });
-    const server = http.createServer(app);
+  const server = http.createServer(app);
+  socket.init(server);
     server.listen(APP_PORT, "0.0.0.0", () => {
       console.log(`[Server] running on ${APP_PORT}`);
     });
+
+    
 }).catch((err) => {
     console.log("[ENV] FAILURE");
     console.log(err);

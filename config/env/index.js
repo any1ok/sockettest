@@ -1,5 +1,5 @@
-import path from "path";
 import dotenv from "dotenv";
+import path from "path";
 import fs from "fs";
 import { fileURLToPath } from 'url';
 //import { decrypt } from "config/aws";
@@ -37,7 +37,7 @@ const encryptedKey = {
 //   } catch (err) {
 //     throw text;
 //   }
-// };
+// };dd
 
 export default async () => {
   const __filename = fileURLToPath(import.meta.url);
