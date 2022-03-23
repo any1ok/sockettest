@@ -9,6 +9,8 @@ import helmet from "helmet"
 import cors from "cors"
 import requestIp from "request-ip";
 import geoip from "geoip-lite"
+import bearerToken from "express-bearer-token";
+
 let corsOptions = {
   origin: 'localhost:3000',
   credentials: true
@@ -79,7 +81,7 @@ initEnv().then(async () =>{
     app.use(cors(corsOptions));
     app.use(helmet.hidePoweredBy());
     app.use(helmet.noSniff());
-
+    app.use(bearerToken());
     
     app.use(requestIp.mw())
     app.use(function(req, res, next) {
