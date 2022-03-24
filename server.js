@@ -82,7 +82,14 @@ initEnv().then(async () =>{
     app.use(helmet.hidePoweredBy());
     app.use(helmet.noSniff());
     app.use(bearerToken());
-    
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+    app.use(
+      cacheControl({
+        maxAge: 0,
+        noCache: true,
+      })
+    );
     app.use(requestIp.mw())
     app.use(function(req, res, next) {
         const ip = req.clientIp;
