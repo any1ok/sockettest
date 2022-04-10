@@ -14,6 +14,11 @@ router.get('/socket', (req, res) => {
     res.sendFile(path.resolve(__dirname+'/../socket.html'));
   });
 
+  router.get('/socket2', (req, res) => {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    res.sendFile(path.resolve(__dirname+'/../socket2.html'));
+  });
 
   var task = cron.schedule('* * * * *', function () {
     console.log('매 분 마다 작업 실행');
