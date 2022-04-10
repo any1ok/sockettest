@@ -77,14 +77,14 @@ initEnv().then(async () =>{
       },
     } */
     );
-    app.use(morganChalk);
+    app.use(morganChalk); //로그 띄우기 색ㅏ별로
 
 
-    app.use(cors(corsOptions));
-    app.use(helmet.hidePoweredBy());
-    app.use(helmet.noSniff());
-    app.use(bearerToken());
-    app.use(express.json());
+    app.use(cors(corsOptions)); // cors
+    app.use(helmet.hidePoweredBy()); // 헤더에서 X-Powered-By를 제거한다.
+    app.use(helmet.noSniff());// 리소스를 내려받을 때 MIME 타입을 보고 동작하기에 정확한 설정이 중요하다.
+    app.use(bearerToken());  //토큰 자동으로 찾아줌
+    app.use(express.json()); //json으로 이루어진 Request Body를 받았을 경우, 요청값을 제대로 받아오지 못하는 문제가 발생한다.
     app.use(express.urlencoded({ extended: true }));
     app.use(
       cacheControl({
