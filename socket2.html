@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      function namespace(nsp) {
+        const namespace = io('/namespace' + nsp);
+          // news라는 이벤트를 받을 시 콘솔에 data.hello를 출력
+          namespace.on('news', (data) => {
+          console.log(data.hello);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="namespace(1)">namespace1</button>
+    <button onclick="namespace(2)">namespace2</button>
+  </body>
+</html>
