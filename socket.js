@@ -22,7 +22,7 @@ const namespace2 = io.of('/namespace2');
 namespace2.on('connection', (socket) => {
   namespace2.emit('news', { hello: "Someone connected at Namespace2" });
 });
-  // io.on('connection', (socket) => {
+  // io.on('connection', (socket) => { 결과 찾기
   //   console.log('a user connected');
   //   socket.on('chat message', (msg) => {
   //     io.emit('chat message', msg);
