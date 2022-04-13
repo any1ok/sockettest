@@ -12,6 +12,7 @@ import geoip from "geoip-lite"
 import bearerToken from "express-bearer-token";
 import cron from "node-cron";
 import cacheControl from "express-cache-controller"
+import ejs from "ejs"
 let corsOptions = {
   origin: 'localhost:3000',
   credentials: true
@@ -28,7 +29,8 @@ initEnv().then(async () =>{
     
     morgan.token("customDate", () => moment().format("YYYY-MM-DD HH:mm:ss"));
     
-
+    app.set('view engine', 'ejs');
+    app.set('views', './views');
     
     const morganChalk = morgan(
       (tokens, req, res) => {
