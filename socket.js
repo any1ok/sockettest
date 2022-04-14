@@ -10,27 +10,33 @@ const init = (server) => {
       origin: "*",
     },
   });
-// NameSpace 1번
-const namespace1 = io.of('/namespace1');
-// connection을 받으면, news 이벤트에 hello 객체를 담아 보낸다
-namespace1.on('connection', (socket) => {
-  namespace1.emit('news', { hello: "Someone connected at namespace1" });
-});
-// NameSpace 2번
-const namespace2 = io.of('/namespace2');
-// connection을 받으면, news 이벤트에 hello 객체를 담아 보낸다
-namespace2.on('connection', (socket) => {
-  namespace2.emit('news', { hello: "Someone connected at Namespace2" });
-});
-  // io.on('connection', (socket) => { 결과 찾기
-  //   console.log('a user connected');
-  //   socket.on('chat message', (msg) => {
-  //     io.emit('chat message', msg);
-  //   });
-  //   socket.on('disconnect', () => {
-  //   console.log('user disconnected');
-  //   });
-  // });
+  let room = ['room1', 'room2'];
+  let a = 0; 
+  
+  io.on('connection', (socket) => {
+    socket.on('disconnect', () => {
+      console.log('user disconnected');
+    });
+  
+    socket.on('leaveRoom', (num, name) => {
+      socket.leave(room[num], () => {
+        console.log(name + ' leave a ' + room[num]);
+        io.to(room[num]).emit('leaveRoom', num, name);
+      });
+    });
+  
+    socket.on('joinRoom', (num, name) => {
+      socket.join(room[num], () => {
+        console.log(name + ' join a ' + room[num]);
+        io.to(room[num]).emit('joinRoom', num, name);
+      });
+    });
+  
+    socket.on('chat message', (num, name, msg) => {
+      a = num;
+      io.to(room[a]).emit('chat message', name, msg);
+    });
+  });
 }
 
 

@@ -3,10 +3,21 @@ import path from "path";
 import fs from "fs";
 import { fileURLToPath } from 'url';
 import cron from "node-cron";
+
 // import currentVer from "./v1";
 // import forTester from "./forTester";
 
 const router = express.Router();
+
+   
+    
+    
+    
+    
+    router.get('/', (req, res) => {
+      console.log(11);
+      res.render('chat');
+    });
 
 router.get('/socket', (req, res) => {
     const __filename = fileURLToPath(import.meta.url);
