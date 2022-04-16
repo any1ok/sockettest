@@ -14,7 +14,7 @@ const router = express.Router();
     
     //
     
-    router.get('/', (req, res) => {
+    router.get('/tt', (req, res) => {
       console.log(11);
       res.render('chat');
     });

@@ -12,8 +12,9 @@ const init = (server) => {
   });
   let room = ['room1', 'room2'];
   let a = 0; 
-  
   io.on('connection', (socket) => {
+  console.log("11111");
+
     socket.on('disconnect', () => {
       console.log('user disconnected');
     });
@@ -21,7 +22,7 @@ const init = (server) => {
     socket.on('leaveRoom', (num, name) => {
       socket.leave(room[num], () => {
         console.log(name + ' leave a ' + room[num]);
-        io.to(room[num]).emit('leaveRoom', num, name);
+        io.to(room[num]).emit('leaveRoom', num, name); //특정 룸에게 이ㄴㅡ보냄
       });
     });
   
