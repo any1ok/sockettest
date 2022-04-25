@@ -12,7 +12,7 @@ const init = (server) => {
   });
   let room = ['room1', 'room2'];
   let a = 0; 
-  
+  //ㄴㅇㅁㄴㅇ
   io.on('connection', (socket) => {
   
 
