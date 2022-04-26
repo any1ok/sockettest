@@ -26,7 +26,7 @@ const init = (server) => {
         io.to(room[num]).emit('leaveRoom', num, name); //특정 룸에게 이ㄴㅡ보냄
       });
     });
-  
+    //ㅁㄴㅇㄹ
     socket.on('joinRoom', (num, name) => {
       socket.join(room[num], () => {
         console.log(name + ' join a ' + room[num]);
