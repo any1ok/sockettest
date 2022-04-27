@@ -17,8 +17,25 @@ let corsOptions = {
   origin: 'localhost:3000',
   credentials: true
 }
+const startAt = '2022-04-25'
+const curDate = moment().format("YYYY-MM-DD");
+const challengeStartAt = moment(startAt).format("YYYY-MM-DD");
+const monday = moment(startAt).day('monday').format("YYYY-MM-DD");
 
 
+let tmp2 = [0,0,0,0,0,0,0];
+      for(let i =0;i<7;i++){
+        const momentTmp = moment(monday).add(i,'days').format("YYYY-MM-DD");
+        if(challengeStartAt>momentTmp && monday <= momentTmp){
+          tmp2[i] = -1;
+        }
+        if(curDate< momentTmp ){
+          tmp2[i] = -1;
+        }
+
+      }
+console.log(tmp2);
+console.log(challengeStartAt)
 initEnv().then(async () =>{
 
     const { APP_PORT } = process.env;

@@ -30,7 +30,7 @@
     "helmet": "^5.0.2",
     "http": "^0.0.1-security",
     "install": "^0.13.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.3",
     "morgan": "^1.10.0",
     "node-cron": "^3.0.0",
     "nodemon": "^2.0.15",
